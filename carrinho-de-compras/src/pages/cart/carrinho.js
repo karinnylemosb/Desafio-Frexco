@@ -1,10 +1,8 @@
-import React from 'react';
-
-function Carrinho({itensCarrinho, adicionarProduto, removerProduto, limparProduto}) {
+function Carrinho() {
   return (
     <div className='itens-carrinho'>
 
-      {/* Limpando o carrinho */}
+      {/*  Limpando o carrinho
       <div className='limpar-carrinho'>
       <h3>Carrinho de compras</h3>
         {itensCarrinho.length >=1 && (
@@ -15,10 +13,10 @@ function Carrinho({itensCarrinho, adicionarProduto, removerProduto, limparProdut
       {itensCarrinho.length === 0 && (<div className='titulo-carrinho-sem-itens'> Não foi adicionado nenhum produto</div>)}
           
         {/* Itens do carrinho  */}
-        <div className='dados-carrinho'>
-          {itensCarrinho.map((item, key) => {
+        {/* <div className='dados-carrinho'> */}
+          {/* {itensCarrinho.map((item, key) => { */}
                 {/* Produtos do carrinho*/}
-                return(
+                {/* return(
                 <div key={(key)} className='lista-itens-carrinho'>
                     <div>
                     <h4>{item.name}</h4>
@@ -30,9 +28,9 @@ function Carrinho({itensCarrinho, adicionarProduto, removerProduto, limparProdut
                         <button className='botao-produto' onClick={() => removerProduto(item)}>-</button>
                         </div>
                     <p>{item.qty}</p>
-                    </div>
+                    </div> */}
                 {/* Informação nutricional */}
-                  <div className='info-itens-carrinho'>
+                  {/* <div className='info-itens-carrinho'>
                   <h4>Valores nutricionais</h4>
                       <p>Carboidratos : {item.nutritions.carbohydrates}</p>
                       <p>Proteínas : {item.nutritions.protein}</p>
@@ -42,9 +40,9 @@ function Carrinho({itensCarrinho, adicionarProduto, removerProduto, limparProdut
                   </div>
                   
               </div> 
-            )
-          })}
-        </div>
+            ) */}
+          {/* })} */}
+        {/* </div>  */}
     </div>
   )
 }

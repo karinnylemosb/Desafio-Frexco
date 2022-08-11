@@ -1,54 +1,54 @@
-import { useState } from 'react';
-import Menu from './components/menu/menu';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Produto from './components/pages/product/produto'
-import produtos from './components/menu/menu'
-import Carrinho from './components/pages/cart/carrinho';
+// import { useState } from 'react';
+// import Menu from './components/menu/menu';
+// import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+// import Produto from './components/pages/product/produto'
+// import produtos from './components/menu/menu'
+// import Carrinho from './components/pages/cart/carrinho';
 
 
 
-function App({produto}) {
-  const [itensCarrinho, setitensCarrinho] = useState([]);
+// function App({produto}) {
+//   const [itensCarrinho, setitensCarrinho] = useState([]);
 
-      const adicionarProduto = (prod) => {
-        const produtoExiste = itensCarrinho.find((item) => item.id === prod.id);
-            if(produtoExiste){
-            setitensCarrinho(itensCarrinho.map((item) => item.id === prod.id ? {...produtoExiste, qty: produtoExiste.qty + 1}: item))
-            } else {
-            setitensCarrinho([...itensCarrinho, {...prod, qty: 1}])
-            }
-      }
+//       const adicionarProduto = (prod) => {
+//         const produtoExiste = itensCarrinho.find((item) => item.id === prod.id);
+//             if(produtoExiste){
+//             setitensCarrinho(itensCarrinho.map((item) => item.id === prod.id ? {...produtoExiste, qty: produtoExiste.qty + 1}: item))
+//             } else {
+//             setitensCarrinho([...itensCarrinho, {...prod, qty: 1}])
+//             }
+//       }
 
-      const removerProduto = (prod) => {
-        const produtoExiste = itensCarrinho.find((item) => item.id === prod.id);
-        if(produtoExiste.qty === 1){
-          setitensCarrinho(itensCarrinho.filter((item) => item.id !== prod.id))
-        } else {
-          setitensCarrinho(itensCarrinho.map((item) => item.id === produto.id ? {...produtoExiste, qty: produtoExiste.qty - 1} : item))
-        }
-      }
+//       const removerProduto = (prod) => {
+//         const produtoExiste = itensCarrinho.find((item) => item.id === prod.id);
+//         if(produtoExiste.qty === 1){
+//           setitensCarrinho(itensCarrinho.filter((item) => item.id !== prod.id))
+//         } else {
+//           setitensCarrinho(itensCarrinho.map((item) => item.id === produto.id ? {...produtoExiste, qty: produtoExiste.qty - 1} : item))
+//         }
+//       }
 
-      const limparProduto = () => {
-        setitensCarrinho([]);
-      }
+//       const limparProduto = () => {
+//         setitensCarrinho([]);
+//       }
 
-  return (
-    <Router>
-      <>
-        <div className="app">
-        <Menu itensCarrinho={itensCarrinho, produtos}/>
-            <div className='container'>
-            {/* routes  */}           
-              <Routes>
-                <Route path ='/' exact element={<Produto produto={produto} adicionarProduto={adicionarProduto}/>} />
-                <Route path ='/carrinho' exact element={<Carrinho itensCarrinho={itensCarrinho} adicionarProduto={adicionarProduto} removerProduto={removerProduto} limparProduto={limparProduto}/>} />
-              </Routes> 
-            </div>
+//   return (
+//     <Router>
+//       <>
+//         <div className="app">
+//         <Menu itensCarrinho={itensCarrinho, produtos}/>
+//             <div className='container'>
+//             {/* routes  */}           
+//               <Routes>
+//                 <Route path ='/' exact element={<Produto produto={produto} adicionarProduto={adicionarProduto}/>} />
+//                 <Route path ='/carrinho' exact element={<Carrinho itensCarrinho={itensCarrinho} adicionarProduto={adicionarProduto} removerProduto={removerProduto} limparProduto={limparProduto}/>} />
+//               </Routes> 
+//             </div>
 
-          </div> 
-      </>
-    </Router>
-  );
-}
+//           </div> 
+//       </>
+//     </Router>
+//   );
+// }
 
-export default App;
+// export default App;
