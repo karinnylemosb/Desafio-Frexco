@@ -1,20 +1,19 @@
 import React, {Fragment}  from 'react'
 // useEffect: Controla o efeito colateral da aplicação. Consumir dados é um efeito. 
-import Product from "../product/product"
 import Header from "../../components/header/header"
 import {Container} from "@mui/material"
 
 
 
 
-function Home() {  
+function NotFound() {  
 
   return (
     <Fragment>
       <Header />
       <main style={{ marginTop: "2em" }}>
         <Container>
-          <Product />
+           <h1 style={{textAlign: "center"}}>Página não encontrada!!!</h1>
         </Container>
       </main>
 
@@ -24,4 +23,4 @@ function Home() {
 
 
 
-export default Home;
+export default NotFound;

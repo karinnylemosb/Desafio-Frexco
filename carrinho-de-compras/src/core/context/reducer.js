@@ -18,15 +18,18 @@ const addProductToCart = (product, state) => {
 const removeProductFromCart = (productId, state) => {
   const updatedCart = [...state.cart];
   const updatedItemIndex = updatedCart.findIndex(item => item.id === productId);
+
   const updatedItem = {
     ...updatedCart[updatedItemIndex]
   };
   updatedItem.quantity--;
-  if(updatedItem.quantity < 0)
+  if (updatedItem.quantity <= 0) {
     updatedCart.splice(updatedItemIndex, 1);
-  else
+  } else {
     updatedCart[updatedItemIndex] = updatedItem;
-}
+  }
+  return { ...state, cart: updatedCart };
+};
 
 export const shopReducer = (state, action) => {
   if (action.type === "ADD_PRODUCT")

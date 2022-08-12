@@ -1,65 +1,56 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import {adicionarProduto} from "../../pages/cart/carrinho"
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper  } from '@mui/material';
 
-function TabelaHortifruti (props) {    
+function TabelaHortifruti (props) { 
 
-    function Row(items) {
-      const { item } = items;
-        return (         
-        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-          <TableCell component="th" scope="row">{item.name}</TableCell>
-          <TableCell align="right">{item.nutritions.calories}</TableCell>
-          <TableCell align="right">{item.nutritions.fat}</TableCell>
-          <TableCell align="right">{item.nutritions.carbohydrates}</TableCell>
-          <TableCell align="right">{item.nutritions.protein}</TableCell>
-          <TableCell align="center"><IconButton color="success" aria-label="add to shopping cart">
-          <AddShoppingCartIcon />
-          </IconButton></TableCell>
-        </TableRow>   
-        )
+    function chargeRow(items, header, hasCount) {
+        return (<TableBody>
+            {items?.length > 0 ?
+                items.map((item, index) => (
+                    <TableRow key={`row${index}`} sx={{ '& > *': { borderBottom: 'unset' } }}>
+                        {hasCount ? <TableCell scope="th">{index + 1}</TableCell> : <></> }
+                        {
+                            item.map((subitem, ind) => {
+                                return <TableCell key={`row${index}Item${ind}`} component={subitem?.component} scope={subitem?.scope} align={subitem?.align}>{subitem?.item}</TableCell>
+                            })
+                        }
+
+                    </TableRow>
+                ))
+                : <TableRow ><TableCell align="center" colSpan={header ? hasCount ? header + 1 : header : 1}>Não há itens</TableCell></TableRow>
+            }
+        </TableBody>)
+
+
     }
 
-    function chargeRow(row){
-        if(row.length > 0){
-            return  row.map((r, i) => (<Row key={`row${i}`} item={r} />))
-        }
-        else {
-            return <></>
-        }
+    function chargeHeader(items, hasCount){
+      if(items?.length > 0) { 
+          return (
+              <TableHead>
+                  <TableRow>
+                      {hasCount ? <TableCell>#</TableCell> : <></> }
+                      {items.map((item, index) => <TableCell component={item[index]?.component} scope={item[index]?.scope} key={`head${index}`} align={item.align}>{item.name}</TableCell>)}
+                  </TableRow>
+              </TableHead>
+          )
+      }
+      return <></>
     }
 
-   const { row } = props;
+   const { rows, headers, count } = props;
     return (
-        <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
-            <TableHead>
-            <TableRow>                
-                <TableCell>Dessert (100g serving)</TableCell>
-                <TableCell align="right">Calories</TableCell>
-                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                <TableCell align="right">Actions</TableCell>
-            </TableRow>
-            </TableHead>
-            <TableBody>              
-             {chargeRow(row)}           
-            </TableBody>
-        </Table>
-        </TableContainer>
+        <React.Fragment>
+             <TableContainer component={Paper}>
+             <Table stickyHeader aria-label="collapsible table">
+                {chargeHeader(headers, count)}                          
+                {chargeRow(rows, headers?.length, count )} 
+            </Table>
+            </TableContainer>
+        </React.Fragment>
     );    
 }
 export default TabelaHortifruti;
+
+
+

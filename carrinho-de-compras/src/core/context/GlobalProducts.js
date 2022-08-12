@@ -1,17 +1,10 @@
-import React, {useState, useReducer, createContext} from "react"
+import React, {useReducer} from "react"
 import { shopReducer, ADD_PRODUCT, REMOVE_PRODUCT } from "./reducer";
 import ShopContext from "./ShoppingContext"
 
 
 
-const GlobalState = props => {
-  const products = [
-    { id: "p1", title: "Gaming Mouse", price: 29.99 },
-    { id: "p2", title: "Harry Potter 3", price: 9.99 },
-    { id: "p3", title: "Used plastic bottle", price: 0.99 },
-    { id: "p4", title: "Half-dried plant", price: 2.99 }
-  ];
-  // const [cart, setCart] = useState([]);
+const GlobalState = props => { 
   const [cartState, dispatch] = useReducer(shopReducer, { cart: [] });
 
   const addProductToCart = product => {
@@ -31,7 +24,6 @@ const GlobalState = props => {
   return (
     <ShopContext.Provider
       value={{
-        products: products,
         cart: cartState.cart,
         addProductToCart: addProductToCart,
         removeProductFromCart: removeProductFromCart
